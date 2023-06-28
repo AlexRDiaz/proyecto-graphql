@@ -1,0 +1,598 @@
+type Query {
+    test:Test
+    test2(jsonText:String):IngresosVarios
+    ListEstatus:[Estatus]
+    ListOrigen:[OrigenComplete]
+    ListAnalisis:[Analisis]
+    ListSeguro:[Seguro]
+    ListUbicaciones:[Ubicacion]
+    ListUnidad:[Unidad]
+    ListReferencia:[Referencia]
+    ListOrdenCompleto(cod_ori:String):[OrdenComplete]
+    ListMedicos: [Medico]
+    searchMedico(nom_med:String,id_med:String):[Medico]
+    searchMedico2(text:String):[Medico]
+    getMedicobyCod(cod_med:String):Medico
+    getMedicobyCed(id_med:String):Medico
+    getPaciente(id_pac:String):Paciente
+    getPacientebyCod(cod_pac:String):Paciente
+    getUnidadbyCod(cod_uni:Int):Unidad
+    searchPaciente(nom_pac:String,ape_pac:String):[Paciente]
+    searchPaciente2(text:String):[Paciente]
+    searchPacienteComplete(text:String):[Paciente]
+    ListPacientes:[Paciente]
+    AnalisisbyCod(cod_ana:String):[Analisis]
+    AnalisisMstrsbyCod(cod_ana:String):[AnalisisxMstrs]
+    searchAnalisis(des_ana:String):[Analisis]
+    searchAnalisisxOrden(nro_ord:String):[AnalisisxOrden]
+    searchAnalisisMstrs(des_ana:String):[AnalisisxMstrs]
+    searchAnalisisMstrs2(des_ana:String):[AnalisisxMstrs]
+    PagoxOrden(nro_ord:Int):[PagoxOrden]
+    MuestraxOrden(nro_ord:Int):MuestraxOrden
+    OrdenByNum(nroD:Int,nroH:Int):[OrdenComplete]
+    OrdenByOrd(nroOrd:Int):OrdenComplete
+    OrdenByFecha(fechaD:String,fechaH:String):[OrdenComplete]
+    OrdenByMed(cod_med:String,nom_med:String):[OrdenComplete]
+    OrdenByPac(cod_pac:String,nom_pac:String,ape_pac:String):[OrdenComplete]
+    OrdenByEstatus(cod_sts:String):[OrdenComplete]
+    ListTipoPago:[TipoPago]
+    ListCalidad:[SgCalidad]
+    ListIessTipo(tipo:String):[IessAnexo]
+    ListIessCIE10(codigo:String):IessAnexo
+    ListMuestras:[Muestras]
+    MuestrabyCod(cod_mst:String):Muestras
+    PreciosbySeguro(cod_ana:String,cod_lpr:String):Precios
+    MenuFavbyUsuario(usuario:String):MenuFav
+    ListPerfiles:[Perfiles]
+    PerfilesbyCodMed(cod_med:Float):[Perfiles]
+    PerfilesbyId(id_perfil:Float):Perfiles
+    ListDiagnostico:[Diagnostico]
+    DiagnosticoId(codigo_diagnostico:String):Diagnostico
+    searchDiagnostico(des_diagnostico:String):[Diagnostico]
+  #  PerfilesbyId(id_perfil:String):Perfiles
+    ListPedidos:[Pedidos]
+    ListPedidosbyMed(cod_med:String):[PedidosCompleto]
+    ListPedidosbyMedpag(fechai:String fechaf:String texto:String cod_med:String):[PedidosCompleto]
+    PedidoUuid(uuid:String):PedidosCompleto
+    PedidobyId(id:String):PedidosCompleto
+    searchUnidad(text:String):[Unidad]
+    ListPerfilesAvalab:[PerfilesAvaComplete]
+    OrdenResultadosbyparam(codigo:String,tipo:String):[OrdenResultados]
+#    insertMedico(jsonMedico:String): IngresosVarios #Mutation
+}
+
+type Mutation{
+    checkLogin(usuario:String,clave:String,tipo_usuario:String):IngresosVarios
+    insertPaciente(cod_ori:String,nom_pac:String,ape_pac:String,fec_nac:String,edad_pac:String,id_pac:String,mail_pac:String,cel_pac:String,sex_pac:String,dir_pac:String,telf_pac:String,pais_nace:String,estado_civil:String,instruccion:String,ocu_pac:String,pat_pac:String,san_pac:String,etnia:String,):IngresosVarios
+    insertPacientelite(json_pac:String):IngresosVarios
+    insertMedico(jsonMedico:String): IngresosVarios #Mutation
+    insertMedicoLite(jsonMedico:String): IngresosVarios #Mutation
+    insertOrden(jsonOrden:String):IngresosVarios
+    insertPeticionxOrden(jsonPeticiones:String):IngresosVarios
+    insertMstxOrden(jsonMuestras:String):IngresosVarios
+    insertOrdenCompleta(jsonOrden:String,jsonMuestras:String,jsonAnalisis:String):IngresosVarios
+    insertPagoxOrden(jsonPago:String):IngresosVarios
+    insertNotaxOrden(jsonNotas:String):IngresosVarios
+    insertSgcxOrden(jsonSgcL:String):IngresosVarios
+    UpdatePaciente(jsonPacienteUpd:String):IngresosVarios
+    UpdateMedico(jsonMedicoUpd:String):IngresosVarios
+    insertPerfil(jsonPerfil:String):IngresosVarios
+    UpdatePerfiles(jsonPerfilesUpd:String):IngresosVarios
+    DeletePerfiles(jsonPerfilesDelete:String):IngresosVarios
+    insertPedido(jsonPedido:String,jsonAnalisis:String):IngresosVarios
+    PedidoAnular(jsonPedido:String):IngresosVarios
+}
+
+
+
+type Test{
+    mensaje:String
+}
+
+
+type IngresosVarios{
+    resultado:String,
+    mensaje:String,
+    data:String
+
+}
+
+type OrdenComplete{
+    nro_ord:Float
+    cod_ori:String
+    fec_ini:String
+    fec_upd:String
+    cod_med:Float
+    cod_pac:Float
+    pre_ord:Float
+    dcto_ord:Float
+    val_ord:String
+    fec_ord:String
+    sts_ord:String
+    des_sts:String
+    det_sts:String
+    sts_adm:String
+    des_sts_adm:String
+    det_sts_adm:String
+    dcto_val:Float
+    stat_ord:Int
+    cod_ref:String
+    txt_ord:String
+    id_plan:Float
+    cod_suc:Int
+    fec_ent:String
+    tip_ord:Int
+    fac_ter:Int
+    cod_uni:Int
+    lock_ord:Int
+    ca1_ord :String
+    ca2_ord :String
+    last_user :String
+    first_user :String
+    cod_emp :Int
+    cod_pac2 :Float
+    pwd_ord :String
+    exp_ord :Int
+    pet_adi :Int
+    FEC_ENT2 :String
+    nro_ext :Int
+    mst_ext :Int
+    obs_ext :String
+    tip_ped :String
+    cod_ped :Int
+    des_ped :String
+    iess_tseg :String
+    iess_dx :String
+    iess_tben :String
+    iess_tder :String
+    iess_nder :String
+    iess_tcon :String
+    iess_dx2 :String
+    iess_id :String
+    nro_aux :Int
+    iess_dep :String
+    mail_ent :Int
+    mail_ent_det :String
+    dicta_ent :Int
+    dicta_ent_det :String
+    envio_ent :Int
+    envio_ent_det :String
+    cod_med2 :Float
+    copia_ent :Int
+    pedido_ent :Int
+    exclusive_ent :Int
+    grupo_ord :Int
+    paciente:Paciente
+}
+
+type PagoxOrden{
+    cod_cli:Float
+    cod_ori :String
+    cod_suc :Int
+    cod_tdp :String
+    doc_pag :String
+    exp_anu :Int
+    exp_pag :Int
+    fac_seg :String
+    fec_ini :String
+    fec_upd :String
+    first_user :String
+    ins_pag :String
+    last_user :String
+    lock_pxg :Int
+    nro_ord :Float
+    obs_pag :String
+    res_pag :String
+    seg_pag :Int
+    sri_id :Int
+    val_pag :Float
+    val_seg :Float
+}
+
+type MuestraxOrden{
+    cod_mst:String
+    cod_suc :Int
+    cop_mst :Int
+    fec_ent :String
+    fec_ini :String
+    fec_toma:String
+    fec_upd :String
+    first_user :String
+    hem_mst :Int
+    id_mxo :Int
+    imp_mst :Int
+    last_user:String
+    lock_mst :Int
+    nro_ord :Int
+    per_toma :String
+}
+
+type Orden{
+    nro_ord:Float
+    cod_ori:String
+    fec_ini:String
+    fec_upd:String
+    cod_med:Float
+    cod_pac:Float
+    pre_ord:Float
+    dcto_ord:Float
+    val_ord:Float
+    fec_ord:String
+    sts_ord:String
+    sts_adm:String
+    dcto_val:Float
+    stat_ord:Int
+    cod_ref:String
+    txt_ord:String
+    id_plan:Float
+    cod_suc:Int
+    fec_ent:String
+    tip_ord:Int
+    fac_ter:Int
+    cod_uni:Int
+}
+
+type Usuario{
+    nom_usu:String
+    pic_usu:String
+    id_user:String
+    mail_user:String
+}
+
+type Medico {
+    cod_med:Float
+    cel_med:String
+    mail_med:String
+    pic_med:String
+    nom_med:String
+    #pwd_med:String
+    id_med:String
+    telf_med:String
+    dir_med:String
+    fec_nac:String
+    fec_upd:String
+    last_user:String
+    esp_med:String
+    obs_med:String
+    cod_esp:String
+    cod_aux:String
+}
+
+type Paciente{
+    nombre_completo:String
+    edad:String
+    ape_pac :String
+    cel_pac :String
+    ciudad_nace :String
+    cod_ori :String
+    cod_pac :Float
+    cod_ref :String
+    cp_pac :String
+    dir_pac :String
+    estado_civil :String
+    etnia :String
+    fec_nac :String
+    fec_upd :String
+    first_user :String
+    id_pac :String
+    instruccion :String
+    last_user :String
+    mail_pac :String
+    nom_pac :String
+    nro_card :String
+    nro_form :String
+    ocu_pac :String
+    pais_id :String
+    pais_nace :String
+    pat_pac :String
+    pcte_card :Int
+    pic_pac :Int
+    profesion :String
+    sex_pac :String
+    telf_pac :String
+    tip_san :String
+    ven_card :String
+}
+
+type OrigenComplete{
+    cod_ori:String
+    des_ori:String
+    cod_suc:Int
+    unidad_medica:String
+    dir_ori:String
+    tel_ori:String
+    ciu_ori:String
+    ubicaciones:[Ubicacion]
+}
+
+type Origen{
+    cod_ori:String
+    des_ori:String
+    cod_suc:Int
+    unidad_medica:String
+    dir_ori:String
+    tel_ori:String
+    ciu_ori:String
+}
+
+type Ubicacion{
+    id_ubicacion:Int
+    nombre_ubicacion:String
+    cod_ori:String
+}
+
+type Referencia{
+    cod_ref:String
+    des_ref :String
+    lock_ref:Int
+    dcto_ref:Int
+}
+
+type Unidad{
+    cod_uni:Int
+    des_uni:String
+    lock_uni:Int
+}
+
+type Seguro{
+    cod_seg:Int
+    des_seg:String
+    lock_seg:Int
+    ruc_seg:String
+    raz_seg:String
+    Plan:[Plan]
+
+}
+
+type Plan{
+    cod_lpr:Float
+    plus_noc:Float
+    des_plan:String
+    lock_dom:Int
+    cod_seg:Float
+    def_plan:Int
+    por_seg:Float
+    obs_rec:String
+    lock_sab:Int
+    id_plan:Float
+    fac_plan:Float
+    plus_dom:Float
+    lock_noc:Int
+    plus_sab:Float
+    lock_plan:Int
+}
+
+type Analisis{
+    cod_ana:String
+    des_ana:String
+    iess_codigo:String
+    tip_ser:String
+}
+
+type AnalisisxMstrs{
+    cod_ana:String
+    des_ana:String
+    iess_codigo:String
+    tip_ser:String
+    dias_proceso:String
+    demora:Int
+    muestras:String
+    cod_muestras:String
+}
+
+type AnalisisxOrden{
+    des_ana:String
+    cant_pet:Float
+    cod_ana :String
+    cod_aux1 :String
+    cod_aux2:String
+    cod_ref :String
+    cod_suc :Int
+    dcto_pet:Float
+    dcto_val:Float
+    des_pet :Int
+    fec_ent :String
+    fec_ini :String
+    fec_ref :String
+    fec_ref_res :String
+    fec_sig :String
+    fec_upd :String
+    fec_upload :String
+    fec_val:String
+    first_user :String
+    how_ent :String
+    id_fac :Int
+    id_med :Int
+    id_plan :Float
+    imp_pet :Float
+    last_user:String
+    lock_pet :Int
+    n_prInt :Int
+    nro_fac :Float
+    nro_ord :Float
+    num_pri :Int
+    paq_pet :Int
+    pet_adi :Int
+    pre_pac :Float
+    pre_seg :Float
+    pre_uni :Float
+    ref_pet :Int
+    rep_pet :Int
+    sts_adm :String
+    sts_pet :String
+    tip_ser :String
+    upl_pet :Int
+    upload :Int
+    usu_ref :String
+    usu_sig :String
+    usu_val :String
+    valor_pet :Float
+}
+
+type Estatus{
+    cod_sts:String
+    des_sts:String
+    det_sts:String
+}
+
+type TipoPago{
+    cod_tdp:String
+    des_pag:String
+    lock_tdp:Int
+    tip_tdp:String
+}
+
+type SgCalidad{
+    id:Int
+    form_sgc:String
+    tip_eve:String
+    tip_pro:String
+    det_eve:String
+    lock_eve:Int
+}
+
+type IessAnexo{
+    codigo:String
+    descripcion:String
+    tipo:String
+    anexo:Int
+    lock_reg:Int
+    anio_anexo:Int
+}
+
+type Muestras{
+    cod_mst:String
+    des_mst:String
+    id_mst:String
+}
+
+type Precios{
+    cod_ana:String
+    cod_fac:String
+    pre_ana:String
+    por_seg:String
+    lock_dlp:Int
+    cod_imp:String
+}
+
+type MenuFav{
+    id_menufav:String
+    config:String
+    usuario:String
+}
+
+type Perfiles{
+    id_perfiles:Int
+    cod_med:Float
+    nombre:String
+    observaciones:String
+    detalle:String
+}
+
+type Diagnostico{
+    codigo:String
+    descripcion:String
+    tipo:String
+}
+
+type Pedidos{
+    id_pedidos:Int
+    cod_pac:Float
+    cod_med:Float
+    fec_ord:String
+    observaciones:String
+    codigo_diagnostico:String
+    fec_examen:String
+    uuid_pedido:String
+    codigo_diagnostico2:String
+    cod_unidad:Int
+    cod_lugar:Int
+    estado_pedido:Int
+    nro_habitacion:String
+    nombre_paciente:String
+    id_pac:String
+    fec_nac:String
+    nom_med:String
+    descripcion_diagnostico:String
+    descripcion_diagnostico_extra:String
+    des_uni:String
+}
+
+type PedidosCompleto{
+    id_pedidos:Int
+    cod_pac:Float
+    cod_med:Float
+    fec_ord:String
+    observaciones:String
+    codigo_diagnostico:String
+    fec_examen:String
+    uuid_pedido:String
+    codigo_diagnostico2:String
+    cod_unidad:Int
+    cod_lugar:Int
+    estado_pedido:Int
+    nro_habitacion:String
+    nombre_paciente:String
+    id_pac:String
+    fec_nac:String
+    nom_med:String
+    descripcion_diagnostico:String
+    descripcion_diagnostico_extra:String
+    des_uni:String
+    anular_pedido:Boolean
+    Analisis:[AnalisisxPedidos]
+    Paciente:Paciente
+    Diagnostico:Diagnostico
+    Diagnosticoextra:Diagnostico
+    Medico:Medico
+    Unidad:Unidad
+}
+
+type AnalisisxPedidos{
+    id_analisisxpedidos:Int
+    id_pedidos:Int
+    cod_ana:String
+    des_ana:String
+}
+
+type PerfilesAva{
+    cod_per:Int
+    des_per:String
+    grupo:String
+    color:String
+}
+
+type PerfilesAvaComplete{
+    cod_per:Int
+    des_per:String
+    grupo:String
+    color:String
+    Analisis:[AnalisisxPerfilAva]
+}
+
+type AnalisisxPerfilAva{
+    cod_per:Int
+    cod_ana:String
+    orden:String
+    des_ana:String
+}
+
+type OrdenResultados{
+    cod_ori:String
+    nro_ord:Float
+    fec_ord:String
+    cod_pac:Float
+    cod_med:Float
+    cod_ref:String
+    sts_ord:String
+    fec_upd:String
+    apellido:String
+    nombre:String
+    id_pac:String
+    nombre_completo:String
+    mail_pac:String
+    nombre_medico:String
+    saldo:String
+    mail_ref:String
+    des_sts:String
+}
